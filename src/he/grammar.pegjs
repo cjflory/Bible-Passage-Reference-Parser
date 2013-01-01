@@ -179,7 +179,8 @@ en_integer
     { return {"type": "integer", "value": parseInt(val.join(""), 10), "indices": [offset, pos - 1]} }
  
 he_integer
-  = val:(he_any_int he_any_int? he_any_int?) { return parseInt(val.join(""), 10); }
+  = val:(he_any_int he_any_int? he_any_int?)
+    { return {"type": "integer", "value":parseInt(val.join(""), 10), "indices": [offset, pos - 1]} }
  
 he_any_int
   = he_int_parsed / he_zero
