@@ -170,25 +170,10 @@ translation
     { return {"type": "translation", "value": val.value, "indices": [offset, pos - 1]} }
 
 /* Base nodes */
+// Integer is never four or more digits long or followed by, e.g., ",000"
 integer
-  = en_integer / he_integer
-
-// Integer is never four or more digits long or followed by, e.g., ",000" 
-en_integer
   = val:([0-9] [0-9]? [0-9]?) !([0-9] / ",000")
     { return {"type": "integer", "value": parseInt(val.join(""), 10), "indices": [offset, pos - 1]} }
- 
-he_integer
-  = val:(he_any_int he_any_int? he_any_int?) { return parseInt(val.join(""), 10); }
- 
-he_any_int
-  = he_int_parsed / he_zero
- 
-he_int_parsed
-  = val:[א-ט] { return val.charCodeAt(0) - 1487; }
- 
-he_zero
-  = val:[י] { return '0'; }
 
 any_integer
   = val:([0-9]+)
